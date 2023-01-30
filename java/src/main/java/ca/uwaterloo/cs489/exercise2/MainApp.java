@@ -7,12 +7,12 @@ import java.io.FileNotFoundException;
 
 import java.nio.file.DirectoryStream;
 import java.nio.file.Files;
+import java.io.File;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
-
 
 public class MainApp {
 
@@ -36,6 +36,8 @@ public class MainApp {
         Job job = new Job(entry.toFile());
         logger.info(String.format("Job %d yields %d\n", job.getInput(), job.processJob()));
       }
+      File f = new File(dir.toString());
+      f.delete();
     } catch (IOException e) {
       e.printStackTrace();
     }
