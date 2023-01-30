@@ -38,12 +38,14 @@ public class MainApp {
         Job job = new Job(file);
         logger.info(String.format("Job %d yields %d\n", job.getInput(), job.processJob()));
         if (file.delete()) {
-          logger.info(String.format("Job file deleted successfully"));
+          logger.info(String.format("Job file deleted successfully."));
         } else {
-          logger.info(String.format("Failed to delete job file"));
+          logger.info(String.format("Failed to delete job file."));
         }
       }
+      // Directory should be empty
       Files.delete(dir);
+      logger.info(String.format("Job directory deleted successfully."));
     } catch (IOException e) {
       e.printStackTrace();
     }
