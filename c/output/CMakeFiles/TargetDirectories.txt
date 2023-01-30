@@ -1,0 +1,3 @@
+/Users/scottsum/School/Courses/cs489/CS489-build-exercise/c/output/CMakeFiles/program.dir
+/Users/scottsum/School/Courses/cs489/CS489-build-exercise/c/output/CMakeFiles/edit_cache.dir
+/Users/scottsum/School/Courses/cs489/CS489-build-exercise/c/output/CMakeFiles/rebuild_cache.dir
