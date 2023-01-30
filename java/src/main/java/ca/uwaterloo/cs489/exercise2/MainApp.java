@@ -24,7 +24,7 @@ public class MainApp {
   }
 
   public static void main(String[] args) {
-    final Logger logger = LogManager.getLogger(MainApp.class.getName());
+    final java.util.logging.Logger logger = LogManager.getLogger(MainApp.class.getName());
 
     // Open the dir
     try {
@@ -35,7 +35,14 @@ public class MainApp {
       for (Path entry : ds) {
         Job job = new Job(entry.toFile());
         logger.info(String.format("Job %d yields %d\n", job.getInput(), job.processJob()));
+        
+
+        entry.toFile().delete();
+        logger.info(String.format("Deleted file for Job %d from temporary directory", job.getInput() ));
       }
+
+      dir.toFile().delete();
+      logger.info("Deleted the temporary file");
     } catch (IOException e) {
       e.printStackTrace();
     }
