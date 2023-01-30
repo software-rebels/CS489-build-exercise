@@ -9,6 +9,7 @@ import java.nio.file.DirectoryStream;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
+import java.io.File;
 
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
@@ -33,9 +34,18 @@ public class MainApp {
 
       // Iterate over all of the files in the directory, creating a job for each
       for (Path entry : ds) {
-        Job job = new Job(entry.toFile());
+        File file = entry.toFile();
+        Job job = new Job(file);
         logger.info(String.format("Job %d yields %d\n", job.getInput(), job.processJob()));
+        if (file.delete()) {
+          logger.info(String.format("Job file deleted successfully."));
+        } else {
+          logger.info(String.format("Failed to delete job file."));
+        }
       }
+      // Directory should be empty
+      Files.delete(dir);
+      logger.info(String.format("Job directory deleted successfully."));
     } catch (IOException e) {
       e.printStackTrace();
     }
