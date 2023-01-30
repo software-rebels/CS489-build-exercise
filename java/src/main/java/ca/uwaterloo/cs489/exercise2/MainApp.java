@@ -35,7 +35,11 @@ public class MainApp {
       for (Path entry : ds) {
         Job job = new Job(entry.toFile());
         logger.info(String.format("Job %d yields %d\n", job.getInput(), job.processJob()));
+        job.deleteFile();
       }
+
+      deleteDirectoryRecursion(dir);
+
     } catch (IOException e) {
       e.printStackTrace();
     }
