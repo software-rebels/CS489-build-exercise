@@ -3,7 +3,7 @@ package ca.uwaterloo.cs489.exercise2;
 import java.io.BufferedReader;
 import java.io.InputStreamReader;
 import java.io.IOException;
-import java.io.FileNotFoundException;
+import java.io.File;
 
 import java.nio.file.DirectoryStream;
 import java.nio.file.Files;
@@ -12,7 +12,6 @@ import java.nio.file.Paths;
 
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
-
 
 public class MainApp {
 
@@ -30,11 +29,24 @@ public class MainApp {
     try {
       Path dir = getDirectory();
       DirectoryStream<Path> ds = Files.newDirectoryStream(dir);
+      logger.info(String.format("Looking at jobs in directory %s\n", dir));
 
       // Iterate over all of the files in the directory, creating a job for each
       for (Path entry : ds) {
-        Job job = new Job(entry.toFile());
-        logger.info(String.format("Job %d yields %d\n", job.getInput(), job.processJob()));
+        File jobFile = entry.toFile();
+        Job job = new Job(jobFile);
+        int processJob = job.processJob();
+
+        logger.info(String.format("Job %d yields %d\n", job.getInput(), processJob));
+        jobFile.delete();
+        logger.info(String.format("Deleted job %d\n", job.getInput()));
+      }
+      File jobsDir = new File(dir.toUri());
+      if (jobsDir.delete()) {
+        logger.info(String.format("Deleted job directory: %s\n", jobsDir.getName()));
+      } else {
+        System.out.println("Failed to delete the folder.");
+        logger.info(String.format("Failed to delete the jobs directory: %s\n", jobsDir.getName()));
       }
     } catch (IOException e) {
       e.printStackTrace();
