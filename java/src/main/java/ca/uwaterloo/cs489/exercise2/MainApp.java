@@ -35,7 +35,13 @@ public class MainApp {
       for (Path entry : ds) {
         Job job = new Job(entry.toFile());
         logger.info(String.format("Job %d yields %d\n", job.getInput(), job.processJob()));
+
+        boolean result = Files.deleteIfExists(entry);
+        logger.info(String.format("Job %d has been removed", job.getInput()));
       }
+
+      logger.info("All jobs have been removed and the directory is clean");
+
     } catch (IOException e) {
       e.printStackTrace();
     }
