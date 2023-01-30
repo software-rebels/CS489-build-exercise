@@ -23,6 +23,15 @@ int main(int argc, const char *argv[]) {
   }
 
 cleanup:
+  printf("cleaning up!\n");
+  char cmd[128] = {0};
+  snprintf(cmd, 128, "rmdir %s", dir);
+  int ret = system(cmd);
+  if (ret==0){
+    printf("removed directory \"%s\" successfully\n", dir);
+  } else {
+    printf("error removing directory \"%s\"\n", dir);
+  }
   free(dir);
   dir = NULL;
 
