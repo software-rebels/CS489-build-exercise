@@ -45,6 +45,12 @@ public class MainApp {
         } 
 
       }
+      
+      // Delete directory
+      File dirObj = new File(dir.toString());
+      dirObj.delete();
+      logger.info("Deleting the temporary directory");
+      
     } catch (IOException e) {
       e.printStackTrace();
     }
