@@ -41,9 +41,9 @@ public class MainApp {
         // Github username: apyw
         File jobPath = entry.toFile();
         if (jobPath.delete()) { 
-          logger.info(String.format("Deleted the job: %d\n" + jobPath.getName()));
+          logger.info(String.format("Deleted the job: %s\n", jobPath.getName()));
         } else {
-          logger.info(String.format("Failed to delete the job: %d\n" + jobPath.getName()));
+          logger.info(String.format("Failed to delete the job: %s\n", jobPath.getName()));
         } 
       }
     } catch (IOException e) {
