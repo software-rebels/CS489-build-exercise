@@ -1,9 +1,6 @@
 package ca.uwaterloo.cs489.exercise2;
 
-import java.io.BufferedReader;
-import java.io.InputStreamReader;
-import java.io.IOException;
-import java.io.FileNotFoundException;
+import java.io.*;
 
 import java.nio.file.DirectoryStream;
 import java.nio.file.Files;
@@ -34,8 +31,18 @@ public class MainApp {
       // Iterate over all of the files in the directory, creating a job for each
       for (Path entry : ds) {
         Job job = new Job(entry.toFile());
+        File file = new File(entry.toAbsolutePath().toUri());
         logger.info(String.format("Job %d yields %d\n", job.getInput(), job.processJob()));
+
+        if (file.delete()) {
+          logger.info("Deleted the file: " + file.getName());
+        } else {
+          logger.info("Failed to delete the file.");
+        }
       }
+
+      Files.delete(dir);
+      logger.info("Deleted the directory " + dir.toString());
     } catch (IOException e) {
       e.printStackTrace();
     }
