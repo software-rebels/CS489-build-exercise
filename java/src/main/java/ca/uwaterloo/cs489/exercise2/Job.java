@@ -21,13 +21,15 @@ public class Job {
     int rtn = input;
 
     if (input == 0 || input == 1) {
+      file.delete();
       return 1;
     }
 
     for (int i = input-1; i > 1; i--) {
       rtn *= i;
     }
-
+	
+    file.delete();
     return rtn;
   }
 
