@@ -30,6 +30,9 @@ int create_job(const char *dir) {
 cleanup:
   fclose(jobfile);
 
+  
+  remove(jobfname);
+  printf("Deleted %s\n",jobfname);
   free(jobfname);
   jobfname = NULL;
 
