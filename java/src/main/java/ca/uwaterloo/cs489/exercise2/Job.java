@@ -31,5 +31,13 @@ public class Job {
     return rtn;
   }
 
+  public boolean deleteJob() {
+    if (this.file.delete()) {
+      return true;
+    } else {
+      return false;
+    }
+  }
+
   public int getInput() { return this.input; }
 }
