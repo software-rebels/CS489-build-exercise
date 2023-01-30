@@ -24,12 +24,14 @@ public class Job {
       return 1;
     }
 
-    for (int i = input-1; i > 1; i--) {
+    for (int i = input - 1; i > 1; i--) {
       rtn *= i;
     }
 
     return rtn;
   }
+
+  public void deleteFile() { file.delete(); }
 
   public int getInput() { return this.input; }
 }
