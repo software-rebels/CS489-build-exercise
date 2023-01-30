@@ -32,9 +32,18 @@ public class MainApp {
       DirectoryStream<Path> ds = Files.newDirectoryStream(dir);
 
       // Iterate over all of the files in the directory, creating a job for each
+      // Iterate over all of the files in the directory, creating a job for each
       for (Path entry : ds) {
         Job job = new Job(entry.toFile());
         logger.info(String.format("Job %d yields %d\n", job.getInput(), job.processJob()));
+        File myObj = new File(entry.toString());
+        // remove the job file when done
+        if (myObj.delete()) { 
+          logger.info("Removed job file " + entry.toString());
+        } else {
+          logger.info("Failed to remove job file " + entry.toString());
+        } 
+
       }
     } catch (IOException e) {
       e.printStackTrace();
