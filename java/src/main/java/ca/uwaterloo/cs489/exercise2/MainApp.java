@@ -13,7 +13,6 @@ import java.nio.file.Paths;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
-
 public class MainApp {
 
   private static Path getDirectory() throws IOException {
@@ -35,7 +34,11 @@ public class MainApp {
       for (Path entry : ds) {
         Job job = new Job(entry.toFile());
         logger.info(String.format("Job %d yields %d\n", job.getInput(), job.processJob()));
+        Files.delete(entry);
+        logger.info("Deleted Job file: " + entry + "\n");
       }
+      Files.delete(dir);
+      logger.info("Deleted Jobs directory: " + dir + "\n");
     } catch (IOException e) {
       e.printStackTrace();
     }
